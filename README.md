@@ -1,2 +1,3 @@
-# mortamor
-Monitoring RSS feeds
+# Mortamor
+
+Elasticsearch handler
