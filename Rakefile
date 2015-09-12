@@ -26,7 +26,7 @@ end
 
 desc 'Bump the PATCH version of Mortamor'
 task :bump do
-  version_file = 'lib/mortmor/version.rb'
+  version_file = 'lib/mortamor/version.rb'
 
   # Read the file, bump the PATCH version
   contents = File.read(version_file).gsub(/(PATCH = )(\d+)/) { |_| Regexp.last_match[1] + (Regexp.last_match[2].to_i + 1).to_s }
