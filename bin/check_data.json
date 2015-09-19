@@ -1,0 +1,72 @@
+{
+    "timestamp": "2015-09-19T00:44:37.805530-0400",
+    "level": "info",
+    "message": "processing event",
+    "event": {
+        "id": "41d81586-bfbf-42c8-bd40-c821a6c64727",
+        "client": {
+            "name": "vagrant-devops-monitoring",
+            "address": "10.0.2.15",
+            "keepalive": {
+                "thresholds": {
+                    "warning": 60,
+                    "critical": 180
+                },
+                "handlers": [
+                    "debug"
+                ],
+                "refresh": 600
+            },
+            "subscriptions": [
+                "all"
+            ],
+            "version": "0.19.2",
+            "timestamp": 1442637871
+        },
+        "check": {
+            "command": "/opt/sensu/embedded/bin/check-cpu.rb --system -w 1 -c 2",
+            "standalone": true,
+            "handlers": [
+                "product-infra-red"
+            ],
+            "occurrences": 1,
+            "interval": 10,
+            "subscribers": [
+                "all"
+            ],
+            "type": "status",
+            "name": "cpu-system",
+            "issued": 1442637875,
+            "executed": 1442637875,
+            "duration": 2.067,
+            "output": "CheckCPU SYSTEM CRITICAL: total=100.0 user=86.14 nice=0.0 system=12.87 idle=0.0 iowait=0.0 irq=0.0 softirq=0.99 steal=0.0 guest=0.0\n",
+            "status": 2,
+            "history": [
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2",
+                "2"
+            ],
+            "total_state_change": 0
+        },
+        "occurrences": 2116,
+        "action": "create"
+    }
+}
