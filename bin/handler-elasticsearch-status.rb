@@ -76,17 +76,18 @@ class ElasticsearchMetrics < Sensu::Handler
     # }
 
     timeout(5) do
-      host   = acquire_setting(host)
-      port   = acquire_setting(port)
-      index  = acquire_setting(index)
+      host   = acquire_setting('host')
+      port   = acquire_setting('port')
+      index  = acquire_setting('index')
+      id     = "#{@event['client']['name']}_#{@event['check']['name']}"
 
-      uri           = URI("http://#{host}:#{port}/#{index}")
+      uri           = URI("http://#{host}:#{port}/#{index}/dashboard/#{id}")
       http          = Net::HTTP.new(uri.host, uri.port)
       request       = Net::HTTP::Post.new(uri.path, 'content-type' => 'application/json; charset=utf-8')
       request.body  = JSON.dump(@event)
       response      = http.request(request)
 
-      if response.code =~ '200|201'
+      if /200|201/ =~ response.code
         puts "request data #=> #{@event}"
         puts "request body #=> #{response.body}"
         puts 'elasticsearch post ok.'
