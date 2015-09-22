@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mortamor (0.0.8)
+    mortamor (0.0.9)
       sensu-plugin (= 1.2.0)
 
 GEM
