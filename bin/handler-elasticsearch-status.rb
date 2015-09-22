@@ -49,16 +49,20 @@ class ElasticsearchMetrics < Sensu::Handler
   def define_sensu_env
     case acquire_infra_details['sensu']['environment']
     when 'prd'
-      return 'Prod: '
+      return 'Prod '
     when 'dev'
-      return 'Dev: '
+      return 'Dev '
     when 'stg'
-      return 'Stg: '
+      return 'Stg '
     when 'vagrant'
-      return 'Vagrant: '
+      return 'Vagrant '
     else
-      return 'Test: '
+      return 'Test '
     end
+  end
+
+  def create_check_name(name)
+    name.split('-').reverse.inject() { |a, n| { n => a } }
   end
 
   def define_check_state_duration
@@ -75,13 +79,13 @@ class ElasticsearchMetrics < Sensu::Handler
       'sensu_client'          => @event['client']['name'],
       'incident_timestamp'    => Time.at(@event['check']['issued']),
       'instance_address'      => @event['client']['address'],
-      'check_name'            => @event['check']['name'],
+      'check_name'            => create_check_name(@event['check']['name']),
       'check_state'           => define_status(@event['check']['status']),
       'check_data'            => check_data, # any additional user supplied data
       'sensu_env'             => define_sensu_env,
       'check_state_duration'  => define_check_state_duration
     }
-    
+
     timeout(5) do
       host   = acquire_setting('host')
       port   = acquire_setting('port')
