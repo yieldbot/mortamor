@@ -1,12 +1,10 @@
 #!/usr/bin/env ruby
 #
-# Sensu Elasticsearch Metrics Handler
+# Sensu Elasticsearch Status Handler
 
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-handler'
 require 'net/http'
 require 'timeout'
-require 'digest/md5'
 require 'date'
 
 class ElasticsearchMetrics < Sensu::Handler
@@ -82,7 +80,7 @@ class ElasticsearchMetrics < Sensu::Handler
       'check_name'            => create_check_name(@event['check']['name']),
       'check_state'           => define_status(@event['check']['status']),
       'check_data'            => check_data, # any additional user supplied data
-      'sensu_env'             => define_sensu_env,
+      'sensu_env'             => define_sensu_env.chop!,
       'check_state_duration'  => define_check_state_duration
     }
 
